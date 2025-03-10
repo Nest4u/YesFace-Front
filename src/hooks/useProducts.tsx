@@ -38,7 +38,7 @@ export interface Product {
 	brand: string // Если бренды перечислены
 	isBestseller: boolean // Если есть поле isBestseller
 }
-
+const API_URL = import.meta.env.VITE_API_URL
 export const useProducts = () => {
 	const [products, setProducts] = useState<Product[]>([])
 	const [loading, setLoading] = useState(true)
@@ -47,7 +47,7 @@ export const useProducts = () => {
 	const transformProducts = (strapiProducts: StrapiProduct[]): Product[] => {
 		return strapiProducts.map(item => ({
 			id: item.id,
-			imageSrc: `http://localhost:1337${item.Photo.url}`,
+			imageSrc: `${API_URL}${item.Photo.url}`,
 			title: item.Name,
 			price: item.Price,
 			description: item.Description,

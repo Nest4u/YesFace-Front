@@ -27,7 +27,7 @@ export interface ProductTen {
 	img: string
 	name: string
 }
-
+const API_URL = import.meta.env.VITE_API_URL
 export const useProductsTen = () => {
 	const [products, setProducts] = useState<ProductTen[]>([])
 	const [loading, setLoading] = useState(true)
@@ -36,7 +36,7 @@ export const useProductsTen = () => {
 	const transformProducts = (strapiProducts: StrapiProductTen[]): ProductTen[] => {
 		return strapiProducts.map(item => ({
 			id: item.id,
-			img: `http://localhost:1337${item.img.url}`,
+			img: `${API_URL}${item.img.url}`,
 			name: item.name
 		}))
 	}
