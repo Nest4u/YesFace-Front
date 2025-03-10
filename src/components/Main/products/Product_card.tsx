@@ -8,12 +8,12 @@ interface Product {
 		id: number
 		imageSrc: string
 		title: string
-		price: string
+		price: number
 		description: string
 		count?: number
 		bestseller?: boolean
-		category?: string
-		brand?: string
+		category: string
+		brand: string
 	}
 	useSwiper?: boolean
 }
@@ -29,38 +29,46 @@ const ProductCard: React.FC<Product> = ({ product }) => {
 				id: product.id,
 				name: product.title,
 				imageSrc: product.imageSrc,
-				price: parseFloat(product.price),
+				price: product.price,
 				quantity: 1
 			})
 		)
 	}
 
 	const handleProductClick = () => {
-		navigate(`/product/${product.id}`, { state: { product } })
+		navigate(`/product/${product.title}`, { state: { product } })
 	}
 
 	return (
-		<div className='container mx-auto py-8'>
+		<div className='container mx-auto px-2 sm:px-4 py-4 sm:py-6'>
 			<div
 				onClick={handleProductClick}
-				className='bg-white shadow-lg rounded-lg overflow-hidden hover:shadow-xl transition-shadow duration-300 cursor-pointer'
+				className='bg-white shadow-md hover:shadow-xl transition-shadow duration-300 cursor-pointer rounded-lg overflow-hidden flex flex-col h-full'
 			>
-				<img
-					src={product.imageSrc}
-					alt={product.title}
-					className='w-full h-48 object-contain'
-				/>
-				<div className='p-4'>
-					<h3 className='text-lg font-semibold text-gray-800'>{product.title}</h3>
-					<p className='text-primary font-bold text-xl mt-2'>${product.price}</p>
-					{product.description && (
-						<p className='text-gray-600 text-sm mt-2 line-clamp-2'>{product.description}</p>
-					)}
+				<div className='relative pt-[100%] sm:pt-[75%]'>
+					{' '}
+					{/* Aspect ratio container */}
+					<img
+						src={product.imageSrc}
+						alt={product.title}
+						className='absolute top-0 left-0 w-full h-full object-contain p-2'
+					/>
+				</div>
+				<div className='p-3 sm:p-4 flex flex-col flex-1'>
+					<div className='flex-1'>
+						<h3 className='text-base sm:text-lg font-semibold text-gray-800 mb-1 line-clamp-2'>
+							{product.title}
+						</h3>
+						<p className='text-primary font-bold text-lg sm:text-xl mb-2'>${product.price}</p>
+						{product.description && (
+							<p className='text-gray-600 text-xs sm:text-sm line-clamp-2'>{product.description}</p>
+						)}
+					</div>
 					<button
 						onClick={handleAddToCart}
-						className='bg-primary text-white px-4 py-2 rounded-lg mt-4 w-full hover:bg-primary-dark transition-colors duration-300'
+						className='w-full mt-4 bg-primary text-white px-3 py-1.5 sm:px-4 sm:py-2 rounded-lg text-sm sm:text-base hover:bg-primary-dark transition-colors duration-300'
 					>
-						Добавить в корзину
+						Add to Cart
 					</button>
 				</div>
 			</div>

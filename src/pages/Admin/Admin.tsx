@@ -1,6 +1,6 @@
-
 import { useNavigate } from 'react-router-dom'
-import { authAPI } from '../api/auth'
+import { authAPI } from '../../api/auth'
+import OrdersManagement from './components/OrdersManagement'
 
 const AdminPage = () => {
 	const navigate = useNavigate()
@@ -23,7 +23,7 @@ const AdminPage = () => {
 							Logout
 						</button>
 					</div>
-					{/* Add your admin dashboard content here */}
+					<OrdersManagement />
 				</div>
 			</div>
 		</div>

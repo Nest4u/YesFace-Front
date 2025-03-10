@@ -38,5 +38,46 @@ export const productsApi = {
 			console.error('Error searching products:', error)
 			throw error
 		}
+	},
+
+	getFiltersData: async () => {
+		try {
+			const response = await api.get('/products?populate=*')
+			const products = response.data.data
+
+			const uniqueCategories = new Set<string>()
+			const uniqueBrands = new Set<string>()
+
+			// Debug log to see the first product structure
+			if (products.length > 0) {
+				console.log('First product structure:', products[0])
+			}
+
+			products.forEach((product: any) => {
+				const { attributes } = product
+
+				if (attributes?.category) {
+					uniqueCategories.add(attributes.category)
+				}
+
+				if (attributes?.brand) {
+					uniqueBrands.add(attributes.brand)
+				}
+			})
+
+			const categories = Array.from(uniqueCategories)
+			const brands = Array.from(uniqueBrands)
+
+			console.log('Extracted categories:', uniqueCategories)
+			console.log('Extracted brands:', brands)
+
+			return {
+				categories,
+				brands
+			}
+		} catch (error) {
+			console.error('Error fetching filter data:', error)
+			throw error
+		}
 	}
 }

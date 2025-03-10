@@ -19,7 +19,7 @@ const Login = () => {
 			setAuthError('') // Clear previous errors
 			const response = await authAPI.login(values.email, values.password)
 			setSubmitting(false)
-			console.log('Login response:', response)
+
 			if (authAPI.isAdmin()) {
 				navigate('/admin')
 			} else {
@@ -46,8 +46,11 @@ const Login = () => {
 
 			<div className='max-w-md w-full space-y-8 bg-white p-8 rounded-xl shadow-lg'>
 				{authError && (
-					<div className="bg-red-100 border border-red-400 text-red-700 px-4 py-3 rounded relative" role="alert">
-						<span className="block sm:inline">{authError}</span>
+					<div
+						className='bg-red-100 border border-red-400 text-red-700 px-4 py-3 rounded relative'
+						role='alert'
+					>
+						<span className='block sm:inline'>{authError}</span>
 					</div>
 				)}
 				<div>
@@ -129,7 +132,7 @@ const Login = () => {
 									</Link>
 								</div>
 							</div>
-                            
+
 							<div>
 								<button
 									type='submit'

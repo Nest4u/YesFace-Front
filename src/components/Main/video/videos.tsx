@@ -3,8 +3,6 @@ import { Swiper, SwiperSlide } from 'swiper/react'
 import { Navigation, Pagination } from 'swiper/modules'
 import videoslide from '../../../assets/hero_video.mp4'
 
-// Пример данных. В реальном проекте это могут быть ссылки на YouTube/Vimeo
-// или локальные файлы, зависит от вашей логики.
 const videoData = [
 	{
 		id: 1,
@@ -42,11 +40,7 @@ export const VideoCarousel: React.FC = () => {
 
 			<div className=' '>
 				{/*
-          Настраиваем Swiper:
-          - spaceBetween: отступ между слайдами
-          - slidesPerView: сколько слайдов показывать одновременно
-          - breakpoints: изменение slidesPerView для разных размеров экрана
-          - navigation, pagination: стрелки навигации и пагинация (точки)
+         
         */}
 				<Swiper
 					spaceBetween={20}

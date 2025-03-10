@@ -7,7 +7,7 @@ interface Product {
 	id: number
 	title: string
 	imageSrc: string
-	price: string
+	price: number
 	description: string
 	category?: string
 	brends?: string

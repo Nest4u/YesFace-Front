@@ -13,6 +13,7 @@ interface StrapiProduct {
 	Category: string // Или другой формат, соответствующий вашему Strapi
 
 	Brend: string // Или другой формат, соответствующий вашему Strapi
+	isBestseller: boolean // Если есть поле isBestseller
 }
 
 interface StrapiResponse {
@@ -31,10 +32,11 @@ export interface Product {
 	id: number
 	imageSrc: string
 	title: string
-	price: string
+	price: number
 	description: string
-	category?: string // Если категории перечислены
+	category: string // Если категории перечислены
 	brand: string // Если бренды перечислены
+	isBestseller: boolean // Если есть поле isBestseller
 }
 
 export const useProducts = () => {
@@ -47,10 +49,11 @@ export const useProducts = () => {
 			id: item.id,
 			imageSrc: `http://localhost:1337${item.Photo.url}`,
 			title: item.Name,
-			price: item.Price.toString(),
+			price: item.Price,
 			description: item.Description,
 			brand: item.Brend || 'Unknown',
-			category: item.Category || 'Unknown' // Если категория есть, добавляем
+			category: item.Category || 'Unknown', // Если категория есть, добавляем
+			isBestseller: item.isBestseller // Если есть поле isBestseller
 		}))
 	}
 	const fetchProducts = async () => {

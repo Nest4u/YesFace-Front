@@ -1,12 +1,14 @@
 import React, { useEffect } from 'react'
 import { useSelector, useDispatch } from 'react-redux'
 import { RootState, AppDispatch } from '../../app/store'
-import { removeItem, clearCart, addItem } from '../../features/cartSlice'
+import { removeItem, addItem } from '../../features/cartSlice'
 import { saveCart } from '../../features/cartThunk'
+import { useNavigate } from 'react-router-dom'
 
 const CartComponent: React.FC<{ onClose: () => void }> = ({ onClose }) => {
 	const dispatch = useDispatch<AppDispatch>()
 	const { items, userId } = useSelector((state: RootState) => state.cart)
+	const navigate = useNavigate()
 
 	const handleUpdateCart = () => {
 		if (userId) {
@@ -14,11 +16,13 @@ const CartComponent: React.FC<{ onClose: () => void }> = ({ onClose }) => {
 				id: item.id,
 				quantity: item.quantity,
 				price: item.price
-			}));
-			dispatch(saveCart({ 
-				userId, 
-				products: cartProducts 
-			}));
+			}))
+			dispatch(
+				saveCart({
+					userId,
+					products: cartProducts
+				})
+			)
 		}
 	}
 
@@ -32,17 +36,13 @@ const CartComponent: React.FC<{ onClose: () => void }> = ({ onClose }) => {
 		dispatch(removeItem(id))
 	}
 
-	const handleClearCart = async () => {
-		try {
-			await dispatch(clearCart());
-			onClose(); // Закрываем корзину после очистки
-		} catch (error) {
-			console.error('Failed to clear cart:', error);
-		}
-	}
-
 	const handleUpdateQuantity = (item: any, quantity: number) => {
 		dispatch(addItem({ ...item, quantity }))
+	}
+
+	const handleCheckout = () => {
+		onClose()
+		navigate('/checkout')
 	}
 
 	const totalPrice = items.reduce((total, item) => total + item.price * item.quantity, 0)
@@ -60,14 +60,8 @@ const CartComponent: React.FC<{ onClose: () => void }> = ({ onClose }) => {
 					</button>
 				</div>
 
-				<button
-					onClick={handleClearCart}
-					className='text-primary'
-				>
-					Clear Cart
-				</button>
 				<ul>
-						{items.map(item => (
+					{items.map(item => (
 						<li
 							key={item.id}
 							className='flex justify-between items-center border-b border-gray-200 pb-4 mb-4'
@@ -81,17 +75,13 @@ const CartComponent: React.FC<{ onClose: () => void }> = ({ onClose }) => {
 								/>
 							</div>
 
-							{/* Детали товара */}
 							<div className='flex-1 ml-4'>
-								{/* Название товара */}
 								<h3 className='text-lg font-semibold text-gray-800'>{item.name}</h3>
 
-								{/* Цена со скидкой и старая цена */}
 								<div className='mt-1'>
 									<span className='text-primary text-sm '>{item.price} Kč</span>
 								</div>
 
-								{/* Управление количеством */}
 								<div className='flex items-center mt-2'>
 									<button
 										onClick={() => handleUpdateQuantity(item, -1)}
@@ -110,7 +100,6 @@ const CartComponent: React.FC<{ onClose: () => void }> = ({ onClose }) => {
 									</button>
 								</div>
 
-								{/* Удаление товара */}
 								<button
 									onClick={() => handleRemoveItem(item.id)}
 									className='mt-2 text-sm text-primary hover:underline'
@@ -123,7 +112,11 @@ const CartComponent: React.FC<{ onClose: () => void }> = ({ onClose }) => {
 				</ul>
 				<div className='mt-4'>
 					<h3 className='text-xl font-bold'>Total: ${totalPrice.toFixed(2)}</h3>
-					<button className='bg-primary text-white px-4 py-2 rounded-lg mt-4 w-full hover:bg-primary-dark transition-colors duration-300'>
+					<button
+						onClick={handleCheckout}
+						disabled={items.length === 0}
+						className='bg-primary text-white px-4 py-2 rounded-lg mt-4 w-full hover:bg-primary-dark transition-colors duration-300 disabled:bg-gray-300'
+					>
 						Checkout
 					</button>
 				</div>

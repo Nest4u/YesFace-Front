@@ -1,5 +1,5 @@
 import Header from '../components/Header/Header'
-import ProductSection from '../components/Products/Product_section'
+import ProductSection from './Products/Product_section'
 import Footer from '../components/Footer/footer'
 
 const Products: React.FC = () => {

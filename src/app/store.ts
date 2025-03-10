@@ -1,22 +1,24 @@
-import { configureStore } from '@reduxjs/toolkit';
-import cartReducer from '../features/cartSlice';
-import { cartSaga } from '../features/cartSaga';
-import createSagaMiddleware from 'redux-saga';
+import { configureStore } from '@reduxjs/toolkit'
+import cartReducer from '../features/cartSlice'
+import { cartSaga } from '../features/cartSaga'
+import createSagaMiddleware from 'redux-saga'
 
-const sagaMiddleware = createSagaMiddleware();
+const sagaMiddleware = createSagaMiddleware()
 
 const store = configureStore({
-  reducer: {
-    cart: cartReducer,
-    // ...другие редюсеры
-  },
-  middleware: (getDefaultMiddleware) =>
-    getDefaultMiddleware().concat(sagaMiddleware)
-});
+	reducer: {
+		cart: cartReducer
+	},
+	middleware: getDefaultMiddleware =>
+		getDefaultMiddleware({
+			serializableCheck: false,
+			thunk: true
+		}).concat(sagaMiddleware)
+})
 
-sagaMiddleware.run(cartSaga);
+sagaMiddleware.run(cartSaga)
 
-export type RootState = ReturnType<typeof store.getState>;
-export type AppDispatch = typeof store.dispatch;
+export type RootState = ReturnType<typeof store.getState>
+export type AppDispatch = typeof store.dispatch
 
-export default store;
+export default store

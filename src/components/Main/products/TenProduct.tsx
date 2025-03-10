@@ -10,7 +10,7 @@ interface TenProductProps {
 
 const TenProduct: React.FC<TenProductProps> = ({ product }) => {
 	return (
-		<NavLink to='/products'>
+		<NavLink to='/product'>
 			<div className='flex  items-center bg-white rounded-lg border  max-h-[66px]  '>
 				<div className=' w-[50px] rounded-full    items-center '>
 					<img

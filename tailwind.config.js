@@ -9,6 +9,9 @@ export default {
 				main_bg: '#FFE3E1', //main bg
 				second_bg: '#FFF5E4', // bg secong
 				header: '#FFD1D1'
+			},
+			screens: {
+				md: '1030px' // Меняем md на 1030px
 			}
 		}
 	},

@@ -2,10 +2,10 @@ import { createSlice, createAsyncThunk, PayloadAction } from '@reduxjs/toolkit'
 import axios from 'axios'
 
 interface AuthState {
-	user: any // Данные пользователя
-	token: string | null // JWT токен
-	loading: boolean // Состояние загрузки
-	error: string | null // Ошибки
+	user: any
+	token: string | null
+	loading: boolean
+	error: string | null
 }
 
 const initialState: AuthState = {
@@ -15,7 +15,6 @@ const initialState: AuthState = {
 	error: null
 }
 
-// Асинхронная функция для входа
 export const login = createAsyncThunk(
 	'auth/login',
 	async ({ identifier, password }: { identifier: string; password: string }, thunkAPI) => {
@@ -31,9 +30,7 @@ export const login = createAsyncThunk(
 	}
 )
 
-// Асинхронная функция для выхода
 export const logout = createAsyncThunk('auth/logout', async (_, thunkAPI) => {
-	// Пример: удаление токена с клиента
 	return null
 })
 
