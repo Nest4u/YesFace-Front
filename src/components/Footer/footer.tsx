@@ -1,17 +1,3 @@
-import React from 'react'
-
-import { NavLink } from 'react-router-dom'
-
-import { Linkedin, Send, MessageCircleMore, HeartPulse } from 'lucide-react'
-import { ReactNode } from 'react'
-
-function MenuItem({ children }: { children: ReactNode }) {
-	return (
-		<a>
-			<li className='text-md font-bold text-link leading-6 hover:underline'>{children}</li>
-		</a>
-	)
-}
 
 export const Footer = () => {
 	return (

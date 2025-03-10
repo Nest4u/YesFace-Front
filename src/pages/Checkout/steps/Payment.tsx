@@ -1,11 +1,11 @@
-import React, { useState, useEffect } from 'react'
+import React, { useState } from 'react'
 import { useNavigate } from 'react-router-dom'
 import { useDispatch, useSelector } from 'react-redux'
 import { ordersAPI, OrderStatus } from '../../../api/orders'
 import { resetCart } from '../../../features/cartSlice'
 import { RootState } from '../../../app/store'
 import { toast, ToastContainer } from 'react-toastify'
-import { addressAPI } from '../../../api/address'
+
 import { cartAPI } from '../../../api/cart'
 
 interface PaymentProps {

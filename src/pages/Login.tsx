@@ -17,7 +17,7 @@ const Login = () => {
 	const handleSubmit = async (values: any, { setSubmitting }: any) => {
 		try {
 			setAuthError('') // Clear previous errors
-			const response = await authAPI.login(values.email, values.password)
+			await authAPI.login(values.email, values.password)
 			setSubmitting(false)
 
 			if (authAPI.isAdmin()) {

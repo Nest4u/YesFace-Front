@@ -3,7 +3,7 @@ import { OrderStatus, ordersAPI } from '../../../api/orders'
 import { Table, Select, Space, message, Card, Typography, Descriptions } from 'antd'
 import type { ColumnsType } from 'antd/es/table'
 
-const { Title, Text } = Typography
+const {  Text } = Typography
 
 interface OrderData {
 	id: number
@@ -79,13 +79,7 @@ const OrdersManagement: React.FC = () => {
 		}
 	}
 
-	const statusColors = {
-		pending: 'orange',
-		paid: 'blue',
-		shipped: 'purple',
-		delivered: 'green',
-		cancelled: 'red'
-	}
+	
 
 	const columns: ColumnsType<OrderData> = [
 		{
