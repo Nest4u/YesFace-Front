@@ -2,10 +2,10 @@
 import axios from 'axios'
 
 export const api = axios.create({
-	baseURL: 'http://localhost:1337/api',
-	headers: {
-		'Content-Type': 'application/json'
-	}
+    baseURL: import.meta.env.VITE_API_URL,
+    headers: {
+        'Content-Type': 'application/json'
+    }
 })
 
 export const productsApi = {

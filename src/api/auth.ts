@@ -1,8 +1,7 @@
 import axios from 'axios'
-
 import { initializeUserCart } from '../features/cartInitializer'
 
-const API_URL = 'http://localhost:1337/api'
+const API_URL = import.meta.env.VITE_API_URL
 
 export const authAPI = {
 	async register(userData: any) {
