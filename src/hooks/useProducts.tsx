@@ -38,7 +38,7 @@ export interface Product {
 	brand: string // Если бренды перечислены
 	isBestseller: boolean // Если есть поле isBestseller
 }
-const API_URL = import.meta.env.VITE_API_URL
+const API_URL = import.meta.env.VITE_API_URL_IMG
 export const useProducts = () => {
 	const [products, setProducts] = useState<Product[]>([])
 	const [loading, setLoading] = useState(true)

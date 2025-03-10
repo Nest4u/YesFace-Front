@@ -27,7 +27,7 @@ export interface ProductTen {
 	img: string
 	name: string
 }
-const API_URL = import.meta.env.VITE_API_URL
+const API_URL = import.meta.env.VITE_API_URL_IMG
 export const useProductsTen = () => {
 	const [products, setProducts] = useState<ProductTen[]>([])
 	const [loading, setLoading] = useState(true)
